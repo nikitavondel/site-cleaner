@@ -9,6 +9,7 @@
   "dependencies": {
     "request": "2.74.0",
     "cheerio": "0.22.0",
-    "async": "2.0.1"
+    "async": "2.0.1",
+    "body": "5.1.0"
   }
 }
