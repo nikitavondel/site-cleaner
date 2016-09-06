@@ -6,7 +6,6 @@ var async = require('async'),
     http = require('http'),
     jsonBody = require("body/json");
     
-// http://tk83:8080/?urls={"urls": ["TEST", "TEST2", "TEST3"]}
     
 var server = http.createServer(function(request, response) {
     try {
