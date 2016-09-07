@@ -4,7 +4,8 @@ var async = require('async'),
     obtain_and_compare_text = require('./lib/obtain_and_compare_text'),
     generalize_selectors = require('./lib/generalize_selectors'),
     http = require('http'),
-    jsonBody = require("body/json");
+    jsonBody = require("body/json"),
+    beautify_text = require('./lib/beautify_text');
     
     
 var server = http.createServer(function(request, response) {
@@ -27,7 +28,8 @@ var server = http.createServer(function(request, response) {
             },
             create_selectors,
             obtain_and_compare_text,
-            generalize_selectors
+            generalize_selectors,
+            beautify_text
             ],
 
             function(err, results) {
