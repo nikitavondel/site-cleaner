@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>
+    <title>GUI for page-cleaner</title>
+  </head>
+  <body>
+    <form>
+        url1:<br>
+        <input type="text" name="url1" id="url1"><br>
+        url2:<br>
+        <input type="text" name="url2" id="url2"><br>
+        url3:<br>
+        <input type="text" name="url3" id="url3"><br>
+         <button type='button' onclick="formSubmit()">Submit</button> 
+    </form>
+    <br>
+    <br>
+    <br>
+    <div id="data">
+    
+    
+    
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script>
+    
+        function formSubmit() {
+            $.ajax({
+                type: "POST",
+                url: "localhost",
+                data: JSON.stringify({ urls: [document.getElementById("url1").value,document.getElementById("url2").value,document.getElementById("url3").value] }),
+                contentType: "application/json",
+                dataType: "json",
+                success: function(data){
+                    for (var i=0;i<data.suggestions.length;i++) {
+                        document.getElementById("data").innerHTML += data.suggestions[i].selector + " : " + data.suggestions[i].text + "<br><br>";
+                    }
+                },
+                failure: function(errMsg) {
+                    alert(errMsg);
+                }
+            });
+        }
+    
+    </script>
+  </body>
+</html>
