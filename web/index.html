@@ -3,38 +3,60 @@
   <head>
     <link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>
     <title>GUI for page-cleaner</title>
+      <style>
+          table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+          }
+
+          td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+          }
+
+          tr:nth-child(even) {
+              background-color: #dddddd;
+          }
+      </style>
   </head>
   <body>
+    <h4>Enter list of links (separated with line breaks)</h4>
     <form>
-        url1:<br>
-        <input type="text" name="url1" id="url1"><br>
-        url2:<br>
-        <input type="text" name="url2" id="url2"><br>
-        url3:<br>
-        <input type="text" name="url3" id="url3"><br>
+        <textarea rows="10" cols="150" id="input"></textarea>
+        <br>
          <button type='button' onclick="formSubmit()">Submit</button> 
     </form>
     <br>
     <br>
     <br>
-    <div id="data">
-    
-    
-    
-    </div>
+    <table style="width:100%" id="output">
+        <tr>
+            <th>CSS Selector</th>
+            <th>Text</th>
+        </tr>
+    </table>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script>
-    
         function formSubmit() {
+            var input = document.getElementById("input").value;
+            var inputArray = input.split(/\r?\n/);
+            for (var i=0; i<inputArray.length;i++) {
+                if (inputArray[i] == "") {
+                    inputArray.splice(i, 1);
+                }
+            }
             $.ajax({
                 type: "POST",
                 url: "localhost",
-                data: JSON.stringify({ urls: [document.getElementById("url1").value,document.getElementById("url2").value,document.getElementById("url3").value] }),
+                data: JSON.stringify({ urls: inputArray }),
                 contentType: "application/json",
                 dataType: "json",
                 success: function(data){
+                    document.getElementById("output").innerHTML = "<tr><th>CSS Selector</th><th>Text</th></tr>";
                     for (var i=0;i<data.suggestions.length;i++) {
-                        document.getElementById("data").innerHTML += data.suggestions[i].selector + " : " + data.suggestions[i].text + "<br><br>";
+                        document.getElementById("output").innerHTML += "<tr><td>" + data.suggestions[i].selector + "</td><td>" + data.suggestions[i].text + "</td></tr>";
                     }
                 },
                 failure: function(errMsg) {
@@ -42,7 +64,6 @@
                 }
             });
         }
-    
     </script>
   </body>
 </html>
