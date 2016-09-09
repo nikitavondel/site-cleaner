@@ -61,6 +61,11 @@
                 },
                 failure: function(errMsg) {
                     alert(errMsg);
+                },
+                statusCode: {
+                    500: function(data) {
+                        alert(JSON.stringify(data.statusText));
+                    }
                 }
             });
         }

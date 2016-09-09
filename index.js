@@ -29,6 +29,7 @@ var server = http.createServer(function(request, response) {
             if (err) {
                 console.log(err);
                 response.statusCode = 500;
+                response.statusMessage = err;
                 response.end();
             } else {
     
@@ -53,6 +54,7 @@ var server = http.createServer(function(request, response) {
                     if (err != null) {
                         console.log(err);
                         response.statusCode = 500;
+                        response.statusMessage = err;
                         response.end();
                     } else {
                         response.statusCode = 200;
@@ -67,6 +69,7 @@ var server = http.createServer(function(request, response) {
         } catch (err) {
             console.log(err);
             response.statusCode = 500;
+            response.statusMessage = err;
             response.end();
         }
     }
