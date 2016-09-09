@@ -15,12 +15,12 @@ And the output will look like:
 {
     "suggestions": [
         {
-            selector: "html > body > #header",
-            text: "I'm a header"
+            "selector": "html > body > #header",
+            "text": "I'm a header"
         },
         {
-            selector: "html > body > #footer",
-            text: "I'm a footer"
+            "selector": "html > body > #footer",
+            "text": "I'm a footer"
         }    
     ]
 }
